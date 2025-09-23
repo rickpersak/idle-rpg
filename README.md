@@ -149,7 +149,118 @@ Each profession produces resources based on tool level and skill level: `basePro
 ### Quality of Life & UI
 
 #### 8. **Enhanced UI/UX**
-- **Skill Trees**: Visual progression paths for each profession
+
+##### **Dashboard Interface Design**
+A comprehensive dashboard that provides a centralized view of all player skills and professions with an intuitive, visually appealing layout.
+
+**Layout Structure:**
+- **Left Sidebar Navigation**: Fixed sidebar containing all available skills/professions
+- **Main Content Area**: Dynamic content panel showing detailed skill information
+- **Top Header Bar**: Player stats, gold display, and quick actions
+- **Bottom Status Bar**: Current activity indicators and notifications
+
+**Sidebar Design Elements:**
+- **Skill Icons**: Custom SVG icons for each profession (pickaxe for Mining, axe for Woodcutting, fishing rod for Fishing, etc.)
+- **Level Indicators**: Circular progress rings showing current level and experience progress
+- **Color-Coded Categories**: 
+  - Gathering Skills: Earth tones (browns, greens)
+  - Crafting Skills: Warm tones (oranges, reds)
+  - Combat Skills: Cool tones (blues, purples)
+- **Hover Effects**: Smooth transitions and tooltips on skill hover
+- **Active State**: Highlighted border and background for currently selected skill
+
+**Visual Design System:**
+- **Color Palette**: 
+  - Primary: Deep forest green (#2D5016) for nature/gathering theme
+  - Secondary: Warm gold (#D4AF37) for currency and achievements
+  - Accent: Rust orange (#B7410E) for crafting and tools
+  - Background: Soft cream (#F5F5DC) for readability
+  - Text: Charcoal (#2F2F2F) for high contrast
+- **Typography**: 
+  - Headers: Bold, modern sans-serif (Inter or Roboto)
+  - Body: Clean, readable sans-serif with good line spacing
+  - Numbers: Monospace font for consistent alignment
+- **Iconography**: 
+  - Custom SVG icons with consistent 24px size
+  - Outline style with 2px stroke weight
+  - Subtle gradients for depth and visual interest
+
+**Interactive Elements:**
+- **Skill Cards**: Expandable cards showing detailed progression
+- **Progress Bars**: Animated progress indicators for experience gain
+- **Tooltips**: Contextual information on hover
+- **Quick Actions**: One-click access to common tasks
+- **Responsive Design**: Adapts seamlessly to different screen sizes
+
+**Skill Page Navigation:**
+- **Persistent Sidebar**: Left sidebar remains visible when viewing individual skill pages
+- **Skill Page Activation**: Clicking on a skill icon opens that skill's dedicated page
+- **Seamless Navigation**: Users can switch between different skill pages without losing context
+- **Visual Feedback**: Active skill page is highlighted in the sidebar for clear orientation
+
+**Skill Page Layout:**
+- **Grid Display**: Items arranged in a maximum 4-column grid for optimal readability
+- **Vertical Scrolling**: Infinite vertical scroll with smooth scrollbar for extensive item lists
+- **Item Cards**: Each item displayed in an organized card format with clear visual hierarchy
+- **Progressive Disclosure**: Current accessible items prominently displayed, future items shown with visual indicators
+
+**Item Information Display:**
+- **Required Level**: Clear indication of player skill level needed for each item
+- **Tool Requirements**: Specific tool tier requirements (e.g., "Steel Pickaxe Required")
+- **Accessibility Status**: Visual indicators showing:
+  - ✅ Currently accessible (green checkmark)
+  - ⏳ Level requirement met, tool upgrade needed (yellow warning)
+  - 🔒 Not yet accessible (gray lock icon)
+- **Item Details**: Comprehensive information including:
+  - Item name and description
+  - Experience gained per action
+  - Resource yield rates
+  - Unlock prerequisites
+
+**User Experience Features:**
+- **Quick Assessment**: Users can instantly see what they can work on vs. future goals
+- **Progress Tracking**: Visual progress indicators for items currently being worked on
+- **Filtering Options**: Sort by accessibility, level requirement, or item type
+- **Search Functionality**: Quick search within skill pages for specific items
+- **Contextual Help**: Tooltips explaining requirements and benefits
+
+**Skill Training System:**
+A comprehensive training system that provides real-time visual feedback for skill progression with automatic inventory management.
+
+**Training Mechanics:**
+- **Progress Bar Visualization**: Continuous progress bar that fills over time during skill training
+- **Automatic Completion**: Upon reaching 100% completion, items are automatically added to player inventory
+- **Seamless Reset**: Training process automatically resets for the next training session
+- **Real-time Updates**: Progress bar updates smoothly without interruption
+
+**Difficulty Scaling System:**
+- **Tiered Difficulty Levels**: Each item type has a specific difficulty that affects training duration
+- **Time Scaling Examples**:
+  - Basic items (Copper Ore): ~3.4 seconds training time
+  - Intermediate items (Iron Ore): ~5.5 seconds training time
+  - Advanced items (Gold Ore): ~9.5 seconds training time
+  - Expert items (Mithril Ore): ~15.0 seconds training time
+- **Scalable Framework**: System designed to accommodate future item types and training durations
+
+**Progress Display Features:**
+- **Time Remaining Counter**: Dynamic countdown showing estimated seconds until completion
+- **Real-time Updates**: Time remaining updates continuously as training progresses
+- **Visual Progress**: Smooth animation showing training advancement
+- **Completion Indicators**: Clear visual feedback when training is complete
+
+**Interactive Tooltips:**
+- **Hover Activation**: Tooltips appear when hovering over progress bars
+- **Item Preview**: Shows potential inventory items that will be gained upon completion
+- **Quantity Information**: Displays expected item quantities and rarity
+- **Training Details**: Additional information about experience gained and skill requirements
+
+**System Requirements:**
+- **Scalable Architecture**: Framework supports easy addition of new item types and training durations
+- **Intuitive Interface**: User-friendly design that enhances gameplay experience
+- **Performance Optimization**: Smooth animations and real-time updates without lag
+- **Visual Appeal**: Engaging progress indicators that maintain player interest
+
+**Additional UI Features:**
 - **Inventory Management**: Organize and manage collected resources
 - **Tool Durability Display**: Show tool condition and repair needs
 - **Mobile Optimization**: Touch-friendly interface for mobile play
