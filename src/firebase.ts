@@ -1,7 +1,7 @@
 // src/firebase.ts
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, enableNetwork, disableNetwork } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 // PASTE THE CONFIG OBJECT YOU COPIED FROM THE FIREBASE CONSOLE HERE
@@ -22,3 +22,28 @@ const app = initializeApp(firebaseConfig);
 // Export the services we'll need
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+// Network management functions for debugging connection issues
+export const enableFirestoreNetwork = async () => {
+  try {
+    await enableNetwork(db);
+    console.log('Firestore network enabled');
+  } catch (error) {
+    console.error('Error enabling Firestore network:', error);
+  }
+};
+
+export const disableFirestoreNetwork = async () => {
+  try {
+    await disableNetwork(db);
+    console.log('Firestore network disabled');
+  } catch (error) {
+    console.error('Error disabling Firestore network:', error);
+  }
+};
+
+// Log Firebase connection status
+console.log('Firebase initialized with config:', {
+  projectId: firebaseConfig.projectId,
+  authDomain: firebaseConfig.authDomain
+});

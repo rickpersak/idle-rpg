@@ -1,39 +1,44 @@
 // src/components/SkillPage.tsx
-import { Generator } from './Generator';
-import type { GameState, ProfessionState } from '../App'; // Assuming types are exported from App.tsx
+import { SkillItemCard } from './SkillItemCard';
+import type { GameState } from '../types';
 import Decimal from 'break_infinity.js';
 
-
 interface SkillPageProps {
-  professions: ProfessionState[];
   activeSkill: string;
-  onPurchase: (index: number) => void;
+  onSetTask: (professionId: string, taskIndex: number) => void;
   gameState: GameState;
   formatNumber: (num: Decimal) => string;
 }
 
-export function SkillPage({ professions, activeSkill, onPurchase, gameState, formatNumber }: SkillPageProps) {
+export function SkillPage({ activeSkill, onSetTask, gameState }: SkillPageProps) {
+  const activeProfession = gameState.professions.find(p => p.name === activeSkill);
+  
+  if (!activeProfession) {
+    return <main className="skill-page"><h3>Select a skill</h3></main>;
+  }
+
   return (
     <main className="skill-page">
       <h3>{activeSkill}</h3>
       <div className="generators-grid">
-        {professions.map((prof, index) => {
-           if (prof.name === activeSkill) {
-            const cost = new Decimal(prof.baseCost).times(Math.pow(1.15, prof.level));
-            const production = new Decimal(prof.baseProduction).times(prof.level);
-            return (
-              <Generator
-                key={prof.id}
-                name={prof.name}
-                level={prof.level}
-                cost={formatNumber(cost)}
-                production={formatNumber(production)}
-                canAfford={gameState.gold.gte(cost)}
-                onPurchase={() => onPurchase(index)}
-              />
-            );
-          }
-          return null;
+        {activeProfession.tasks.map((task, index) => {
+          const isCurrentTask = activeProfession.activeTaskIndex === index;
+          const isPaused = isCurrentTask && activeProfession.isPaused;
+          const progressPercent = isCurrentTask && task.timeToComplete > 0
+            ? Math.min(100, (activeProfession.taskProgress / task.timeToComplete) * 100)
+            : 0;
+
+          return (
+            <SkillItemCard
+              key={task.id}
+              task={task}
+              isUnlocked={activeProfession.level >= task.requiredLevel}
+              isActive={isCurrentTask}
+              isPaused={isPaused}
+              progressPercent={progressPercent}
+              onSetTask={() => onSetTask(activeProfession.id, index)}
+            />
+          );
         })}
       </div>
     </main>
