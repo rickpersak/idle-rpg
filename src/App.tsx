@@ -975,40 +975,48 @@ function App() {
   const hasSaveAvailable = savedDoc ? Object.keys(savedDoc.slots ?? {}).length > 0 : false;
   const lastSaveLabel = formatLastSaveLabel(savedDoc?.current?.savedAt);
 
+  // Show main menu as separate page if it's open
+  if (isMainMenuOpen) {
+    return (
+      <>
+        <MainMenu
+          isOpen={true}
+          isLoading={menuStatus === 'loading'}
+          hasSave={hasSaveAvailable}
+          hasActiveSession={hasActiveSession}
+          lastSaveLabel={lastSaveLabel}
+          onContinue={handleContinueGame}
+          onNewGame={handleNewGame}
+          onManualSave={handleManualSave}
+          onOpenLoad={handleLoadGame}
+          onSettings={() => setIsSettingsOpen(true)}
+          onCredits={() => setIsCreditsOpen(true)}
+          onQuit={handleQuitGame}
+        />
+
+        <SettingsModal
+          isOpen={isSettingsOpen}
+          settings={settings}
+          onChange={setSettings}
+          onClose={() => setIsSettingsOpen(false)}
+          onReset={() => setSettings(DEFAULT_SETTINGS)}
+        />
+
+        <CreditsModal isOpen={isCreditsOpen} onClose={() => setIsCreditsOpen(false)} />
+
+        <SaveSlotsModal
+          isOpen={isLoadModalOpen}
+          slots={savedDoc?.slots ?? {}}
+          onLoad={handleLoadSlot}
+          onClose={() => setIsLoadModalOpen(false)}
+        />
+      </>
+    );
+  }
+
+  // Show game dashboard when main menu is closed
   return (
     <>
-      <MainMenu
-        isOpen={isMainMenuOpen}
-        isLoading={menuStatus === 'loading'}
-        hasSave={hasSaveAvailable}
-        hasActiveSession={hasActiveSession}
-        lastSaveLabel={lastSaveLabel}
-        onContinue={handleContinueGame}
-        onNewGame={handleNewGame}
-        onManualSave={handleManualSave}
-        onOpenLoad={handleLoadGame}
-        onSettings={() => setIsSettingsOpen(true)}
-        onCredits={() => setIsCreditsOpen(true)}
-        onQuit={handleQuitGame}
-      />
-
-      <SettingsModal
-        isOpen={isSettingsOpen}
-        settings={settings}
-        onChange={setSettings}
-        onClose={() => setIsSettingsOpen(false)}
-        onReset={() => setSettings(DEFAULT_SETTINGS)}
-      />
-
-      <CreditsModal isOpen={isCreditsOpen} onClose={() => setIsCreditsOpen(false)} />
-
-      <SaveSlotsModal
-        isOpen={isLoadModalOpen}
-        slots={savedDoc?.slots ?? {}}
-        onLoad={handleLoadSlot}
-        onClose={() => setIsLoadModalOpen(false)}
-      />
-
       <Dashboard
         gameState={gameState}
         handleSetTask={handleSetTask}
